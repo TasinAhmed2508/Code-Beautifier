@@ -6,26 +6,23 @@ export const bindPasteFormat = (refs, state, renderAll) => {
     return;
   }
 
-  refs.codeInput.addEventListener('paste', (event) => {
+  const applyText = (text) => {
+    if (!text) return;
+    const language = detectLanguage(text);
+    const formatted = formatCode(text, language);
+    state.code = formatted;
+    refs.codeInput.value = state.code;
+    renderAll(refs, state);
+  };
+
+  refs.codeInput.addEventListener('paste', async (event) => {
     const clipboardText = event.clipboardData ? event.clipboardData.getData('text') : '';
     if (clipboardText) {
       event.preventDefault();
-      const language = detectLanguage(clipboardText);
-      const formatted = formatCode(clipboardText, language);
-      state.code = formatted;
-      refs.codeInput.value = state.code;
-      renderAll(refs, state);
+      applyText(clipboardText);
       return;
     }
 
-    setTimeout(() => {
-      const text = refs.codeInput.value || '';
-      if (!text) return;
-      const language = detectLanguage(text);
-      const formatted = formatCode(text, language);
-      state.code = formatted;
-      refs.codeInput.value = state.code;
-      renderAll(refs, state);
-    }, 0);
+    setTimeout(() => applyText(refs.codeInput.value || ''), 0);
   });
 };

@@ -26,6 +26,7 @@ export const buildSegments = (code, language, highlightLine, style) => {
     if (className.includes('brace')) return tokens.brace;
     return tokens.plain;
   };
+  
 
   const lines = code.split('\n');
   const segments = [];

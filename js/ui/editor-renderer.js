@@ -17,7 +17,7 @@ export const renderEditor = ({
   ghostTarget,
   language
 }) => {
-  const lines = code.split('\n');
+  const lines = String(code ?? '').split('\n');
   const lineNumbers = showLineNumbers
     ? `<div class="line-numbers">${buildLineNumbers(lines)}</div>`
     : '';
