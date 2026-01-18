@@ -1,0 +1,14 @@
+.export-card[data-theme="ray-moss"] {
+  background: radial-gradient(circle at top, rgba(109, 215, 159, 0.2), transparent 55%),
+    radial-gradient(circle at 85% 15%, rgba(228, 177, 101, 0.2), transparent 45%),
+    linear-gradient(160deg, rgba(9, 13, 9, 0.98), rgba(16, 20, 14, 0.92));
+  --token-foreground: #ffffff;
+  --token-comment: #708b6c;
+  --token-string: #e9eb9d;
+  --token-keyword: #6dd79f;
+  --token-function: #b3d767;
+  --token-number: #46b114;
+  --token-constant: #e4b165;
+  --token-parameter: #b3d767;
+  --token-punctuation: #6dd79f;
+}

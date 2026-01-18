@@ -1,0 +1,32 @@
+.editor {
+  position: relative;
+  display: grid;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 24px;
+  padding: 24px;
+}
+
+.editor__layer {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.editor__input {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.editor__highlight {
+  pointer-events: none;
+}
+
+.editor__lines {
+  display: flex;
+  gap: 16px;
+}
+
+.editor__lines--ghost {
+  visibility: hidden;
+}

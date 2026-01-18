@@ -1,0 +1,9 @@
+.token-comment { color: var(--token-comment, #8a757d); font-style: italic; }
+.token-string { color: var(--token-string, #e9aefe); }
+.token-keyword { color: var(--token-keyword, #6599ff); font-weight: 700; }
+.token-hook { color: var(--token-parameter, #fbbf24); }
+.token-function { color: var(--token-function, #f8518d); }
+.token-component { color: var(--token-constant, #49e8f2); }
+.token-number { color: var(--token-number, #55e7b2); }
+.token-operator { color: var(--token-punctuation, #a78bfa); }
+.token-brace { color: var(--token-punctuation, #facc15); }

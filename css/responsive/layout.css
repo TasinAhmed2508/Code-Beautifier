@@ -1,0 +1,14 @@
+@media (max-width: 768px) {
+  .topbar {
+    padding: 0 16px;
+  }
+
+  .toolbar {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .toolbar__divider {
+    display: none;
+  }
+}

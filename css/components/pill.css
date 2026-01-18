@@ -1,0 +1,35 @@
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--ray-panel-muted);
+  border: 1px solid var(--ray-border);
+}
+
+.app[data-theme="light"] .pill {
+  background: rgba(226, 232, 240, 0.8);
+}
+
+.pill button {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border-radius: 8px;
+  opacity: 0.6;
+  transition: all 0.2s ease;
+}
+
+.pill button.is-active {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.app[data-theme="light"] .pill button.is-active {
+  color: #0f172a;
+  background: #fff;
+}

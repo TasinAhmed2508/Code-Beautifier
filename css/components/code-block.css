@@ -1,0 +1,22 @@
+.code-block {
+  color: var(--token-foreground, #f8fafc);
+}
+
+textarea#code-input {
+  width: 100%;
+  min-height: 100%;
+  flex: 1;
+  background: transparent;
+  color: transparent;
+  caret-color: var(--token-foreground, #f8fafc);
+  line-height: 24px;
+  font-family: var(--mono);
+  font-size: 14px;
+  overflow: hidden;
+  white-space: pre;
+}
+
+textarea#code-input::selection {
+  background: rgba(101, 153, 255, 0.3);
+  color: transparent;
+}

@@ -1,0 +1,14 @@
+.export-card[data-theme="ray-slate"] {
+  background: radial-gradient(circle at top, rgba(81, 208, 248, 0.16), transparent 55%),
+    radial-gradient(circle at 85% 20%, rgba(150, 129, 194, 0.18), transparent 45%),
+    linear-gradient(160deg, rgba(10, 12, 16, 0.98), rgba(20, 23, 30, 0.92));
+  --token-foreground: #ffffff;
+  --token-comment: #4a4c56;
+  --token-string: #6d86a4;
+  --token-keyword: #7da9ab;
+  --token-function: #51d0f8;
+  --token-number: #75d2b1;
+  --token-constant: #9681c2;
+  --token-parameter: #51d0f8;
+  --token-punctuation: #7da9ab;
+}

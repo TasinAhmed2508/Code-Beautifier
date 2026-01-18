@@ -1,0 +1,21 @@
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.brand__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, #4b7cf5, #49e8f2);
+  color: #0b0d11;
+  box-shadow: 0 12px 26px rgba(73, 232, 242, 0.25);
+}
+
+.brand__text {
+  font-size: 18px;
+}

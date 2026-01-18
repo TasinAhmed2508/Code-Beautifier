@@ -1,0 +1,27 @@
+.export-card[data-theme="midnight"] {
+  background: linear-gradient(135deg, #0f172a, #4c1d95, #0f172a);
+}
+
+.export-card[data-theme="ocean"] {
+  background: linear-gradient(135deg, #2563eb, #06b6d4, #10b981);
+}
+
+.export-card[data-theme="sunset"] {
+  background: linear-gradient(135deg, #f97316, #ec4899, #8b5cf6);
+}
+
+.export-card[data-theme="forest"] {
+  background: linear-gradient(135deg, #10b981, #0f766e, #064e3b);
+}
+
+.export-card[data-theme="fire"] {
+  background: linear-gradient(135deg, #dc2626, #f97316, #facc15);
+}
+
+.export-card[data-theme="nebula"] {
+  background: linear-gradient(135deg, #312e81, #7e22ce, #db2777);
+}
+
+.export-card[data-theme="clean"] {
+  background: #e2e8f0;
+}

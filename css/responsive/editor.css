@@ -1,0 +1,17 @@
+@media (max-width: 640px) {
+  .toolbar {
+    width: 100%;
+  }
+
+  .export-card {
+    min-width: 100%;
+  }
+
+  .window {
+    width: 100%;
+  }
+
+  .editor {
+    padding: 16px;
+  }
+}

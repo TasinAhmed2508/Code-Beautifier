@@ -1,0 +1,15 @@
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon svg,
+.cta__icon svg {
+  display: block;
+}
+
+.app[data-theme="dark"] .icon[data-icon="sun"],
+.app[data-theme="light"] .icon[data-icon="moon"] {
+  display: none;
+}

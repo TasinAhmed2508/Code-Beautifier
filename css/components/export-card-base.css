@@ -1,0 +1,23 @@
+.export-card {
+  margin-top: 32px;
+  border-radius: 20px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+  transition: all 0.4s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 350px;
+  max-width: 100%;
+}
+
+.export-card[data-padding="small"] {
+  padding: 32px;
+}
+
+.export-card[data-padding="medium"] {
+  padding: 48px;
+}
+
+.export-card[data-padding="large"] {
+  padding: 72px;
+}

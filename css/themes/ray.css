@@ -1,0 +1,15 @@
+.export-card[data-theme="ray"] {
+  background: linear-gradient(140deg, rgb(207, 47, 152), rgb(106, 61, 236));
+  --token-foreground: #ffffff;
+  --token-comment: #8a757d;
+  --token-string: #e9aefe;
+  --token-keyword: #6599ff;
+  --token-function: #f8518d;
+  --token-number: #55e7b2;
+  --token-constant: #49e8f2;
+  --token-parameter: #f8518d;
+  --token-punctuation: #f8518d;
+  --ray-panel: rgba(20, 10, 36, 0.85);
+  --ray-panel-muted: rgba(16, 8, 28, 0.9);
+  --window-bar: rgba(24, 12, 40, 0.9);
+}

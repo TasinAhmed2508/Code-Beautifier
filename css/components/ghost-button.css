@@ -1,0 +1,17 @@
+.ghost {
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(18, 18, 20, 0.9);
+  transition: background 0.2s ease;
+}
+
+.app[data-theme="light"] .ghost {
+  background: #fff;
+}
+
+.ghost:hover {
+  background: rgba(255, 255, 255, 0.1);
+}

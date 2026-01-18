@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TA ZEN - Code Beautifier</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base/variables.css" />
+  <link rel="stylesheet" href="css/base/reset.css" />
+  <link rel="stylesheet" href="css/layout/app.css" />
+  <link rel="stylesheet" href="css/layout/topbar.css" />
+  <link rel="stylesheet" href="css/layout/workspace.css" />
+  <link rel="stylesheet" href="css/layout/canvas.css" />
+  <link rel="stylesheet" href="css/components/brand.css" />
+  <link rel="stylesheet" href="css/components/topbar-actions.css" />
+  <link rel="stylesheet" href="css/components/icon-button.css" />
+  <link rel="stylesheet" href="css/components/icons.css" />
+  <link rel="stylesheet" href="css/components/cta.css" />
+  <link rel="stylesheet" href="css/components/toolbar.css" />
+  <link rel="stylesheet" href="css/components/swatches.css" />
+  <link rel="stylesheet" href="css/components/pill.css" />
+  <link rel="stylesheet" href="css/components/ghost-button.css" />
+  <link rel="stylesheet" href="css/components/square-button.css" />
+  <link rel="stylesheet" href="css/components/export-card-base.css" />
+  <link rel="stylesheet" href="css/components/window.css" />
+  <link rel="stylesheet" href="css/components/editor.css" />
+  <link rel="stylesheet" href="css/components/line-numbers.css" />
+  <link rel="stylesheet" href="css/components/code-block.css" />
+  <link rel="stylesheet" href="css/components/tokens.css" />
+  <link rel="stylesheet" href="css/themes/legacy.css" />
+  <link rel="stylesheet" href="css/themes/ray.css" />
+  <link rel="stylesheet" href="css/themes/ray-slate.css" />
+  <link rel="stylesheet" href="css/themes/ray-moss.css" />
+  <link rel="stylesheet" href="css/themes/ray-arctic.css" />
+  <link rel="stylesheet" href="css/themes/ray-ember.css" />
+  <link rel="stylesheet" href="css/responsive/layout.css" />
+  <link rel="stylesheet" href="css/responsive/editor.css" />
+</head>
+<body>
+  <div class="app" data-theme="dark">
+    <nav class="topbar">
+      <div class="brand">
+        <div class="brand__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16v16H4z" opacity="0.2"></path>
+            <path d="M7 8h10"></path>
+            <path d="M7 12h7"></path>
+            <path d="M7 16h4"></path>
+          </svg>
+        </div>
+        <span class="brand__text">TA ZEN</span>
+      </div>
+
+      <div class="topbar__actions">
+        <button class="icon-btn" id="toggle-mode" aria-label="Toggle theme">
+          <span class="icon" data-icon="sun" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2"></path>
+              <path d="M12 20v2"></path>
+              <path d="M4.93 4.93l1.41 1.41"></path>
+              <path d="M17.66 17.66l1.41 1.41"></path>
+              <path d="M2 12h2"></path>
+              <path d="M20 12h2"></path>
+              <path d="M6.34 17.66l-1.41 1.41"></path>
+              <path d="M19.07 4.93l-1.41 1.41"></path>
+            </svg>
+          </span>
+          <span class="icon" data-icon="moon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z"></path>
+            </svg>
+          </span>
+        </button>
+        <span class="divider"></span>
+        <button class="cta" id="export-image">
+          <span class="cta__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+              <circle cx="12" cy="13" r="4"></circle>
+            </svg>
+          </span>
+          <span class="cta__text">Export Image</span>
+        </button>
+      </div>
+    </nav>
+
+    <main class="workspace">
+      <section class="canvas">
+        <div class="toolbar" role="group" aria-label="Controls">
+          <div class="toolbar__group">
+            <span class="toolbar__label">Theme</span>
+            <div class="swatches" id="theme-swatches"></div>
+          </div>
+
+          <span class="toolbar__divider"></span>
+
+          <div class="toolbar__group">
+            <div class="control">
+              <span class="toolbar__label">Padding</span>
+              <div class="pill" id="padding-toggle">
+                <button data-padding="small">S</button>
+                <button data-padding="medium" class="is-active">M</button>
+                <button data-padding="large">L</button>
+              </div>
+            </div>
+
+            <div class="control">
+              <span class="toolbar__label">Window</span>
+              <button class="ghost" id="window-style">macOS</button>
+            </div>
+
+            <div class="control">
+              <span class="toolbar__label">Lines</span>
+              <button class="square" id="toggle-lines" aria-pressed="true">#</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="export-card" id="export-card" data-padding="medium" data-window="mac" data-theme="ray">
+          <div class="window">
+            <div class="window__bar" id="window-bar">
+              <div class="window__dots" data-style="mac">
+                <span class="dot dot--red"></span>
+                <span class="dot dot--yellow"></span>
+                <span class="dot dot--green"></span>
+              </div>
+              <input class="window__title" id="window-title" value="App.js" />
+              <div class="window__ghost" id="window-ghost">
+                <span class="win-box"></span>
+                <span class="win-box"></span>
+                <span class="win-close">X</span>
+              </div>
+            </div>
+
+            <div class="editor">
+              <div class="editor__layer editor__highlight" aria-hidden="true">
+                <div class="editor__lines" id="highlight-lines"></div>
+              </div>
+
+              <div class="editor__layer editor__input">
+                <div class="editor__lines editor__lines--ghost" id="ghost-lines"></div>
+                <textarea id="code-input" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" placeholder="Paste your code here..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="canvas__hint">Editing enabled. Paste code directly into the card.</p>
+        <p class="canvas__hint">Made by <a href="https://github.com/TasinAhmed2508" target="_blank" rel="noopener noreferrer">Tasin Ahmed</a></p>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

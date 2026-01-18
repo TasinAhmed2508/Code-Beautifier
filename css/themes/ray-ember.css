@@ -1,0 +1,14 @@
+.export-card[data-theme="ray-ember"] {
+  background: radial-gradient(circle at top, rgba(255, 175, 101, 0.2), transparent 55%),
+    radial-gradient(circle at 85% 15%, rgba(233, 120, 161, 0.2), transparent 45%),
+    linear-gradient(160deg, rgba(16, 12, 8, 0.98), rgba(22, 18, 12, 0.92));
+  --token-foreground: #ffffff;
+  --token-comment: #878572;
+  --token-string: #f9d38c;
+  --token-keyword: #ffaf65;
+  --token-function: #e2d66b;
+  --token-number: #e7cf55;
+  --token-constant: #e978a1;
+  --token-parameter: #e2d66b;
+  --token-punctuation: #ffaf65;
+}
