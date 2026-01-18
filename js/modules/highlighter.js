@@ -1,14 +1,4 @@
-﻿const TOKEN_RULES = [
-  { type: 'comment', regex: /\/\/.*|\/\*[\s\S]*?\*\//g, className: 'token-comment' },
-  { type: 'string', regex: /(['"`])(.*?)\1/g, className: 'token-string' },
-  { type: 'keyword', regex: /\b(const|let|var|function|return|if|else|for|while|import|from|export|default|class|extends|new|this|try|catch|async|await)\b/g, className: 'token-keyword' },
-  { type: 'hook', regex: /\b(useState|useEffect|useContext|useReducer|useCallback|useMemo|useRef)\b/g, className: 'token-hook' },
-  { type: 'function', regex: /\b([a-zA-Z_$][a-zA-Z0-9_$]*)(?=\()/g, className: 'token-function' },
-  { type: 'component', regex: /\b([A-Z][a-zA-Z0-9_$]*)\b/g, className: 'token-component' },
-  { type: 'number', regex: /\b\d+\b/g, className: 'token-number' },
-  { type: 'operator', regex: /[=+\-*/&|!<>?:]/g, className: 'token-operator' },
-  { type: 'brace', regex: /[{}\[\]()]/g, className: 'token-brace' }
-];
+import { getTokenRules } from './lang/rules.js';
 
 const escapeHtml = (value) =>
   value
@@ -44,10 +34,11 @@ const splitWithToken = (text, rule) => {
   return segments;
 };
 
-export const highlightLine = (line) => {
+export const highlightLine = (line, language = 'generic') => {
   let parts = [{ text: line, className: 'token-plain' }];
+  const tokenRules = getTokenRules(language);
 
-  TOKEN_RULES.forEach((rule) => {
+  tokenRules.forEach((rule) => {
     const nextParts = [];
     parts.forEach((part) => {
       if (part.className !== 'token-plain') {
@@ -71,4 +62,3 @@ export const highlightLine = (line) => {
     })
     .join('');
 };
-
