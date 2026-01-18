@@ -1,4 +1,4 @@
-import { buildSvgFromCard } from '../utils/svg/renderer.js';
+import { downloadHtml, downloadPng, downloadSvg } from '../utils/export/download.js';
 
 export const exportAsImage = async ({
   element,
@@ -20,6 +20,14 @@ export const exportAsImage = async ({
     if (mode === 'download-svg') {
       downloadSvg(element, scale);
       status.textContent = 'Saved SVG';
+      return;
+    }
+
+    if (mode === 'download-html') {
+      const codeInput = element.querySelector('#code-input');
+      const titleInput = element.querySelector('#window-title');
+      downloadHtml(element, codeInput ? codeInput.value : '', titleInput ? titleInput.value : 'App.js');
+      status.textContent = 'Saved HTML';
       return;
     }
 
@@ -70,22 +78,4 @@ const copyToClipboard = async (blob) => {
     return true;
   }
   return false;
-};
-
-const downloadPng = (canvas) => {
-  const link = document.createElement('a');
-  link.download = 'code-snippet.png';
-  link.href = canvas.toDataURL('image/png');
-  link.click();
-};
-
-const downloadSvg = (card, scale) => {
-  const { svg } = buildSvgFromCard(card, scale);
-  const blob = new Blob([svg], { type: 'image/svg+xml' });
-  const url = URL.createObjectURL(blob);
-  const link = document.createElement('a');
-  link.download = 'code-snippet.svg';
-  link.href = url;
-  link.click();
-  URL.revokeObjectURL(url);
 };
