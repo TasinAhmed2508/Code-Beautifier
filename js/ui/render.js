@@ -3,6 +3,7 @@ import { updateExportCard } from './card.js';
 import { updateToolbar } from './toolbar.js';
 import { updateMode } from './mode.js';
 import { renderEditorView } from './editor-view.js';
+import { updateStatus } from './status.js';
 
 export const renderAll = (refs, state) => {
   buildSwatches(refs.themeSwatches, state);
@@ -10,4 +11,5 @@ export const renderAll = (refs, state) => {
   updateToolbar(refs.paddingToggle, refs.toggleLines, refs.windowStyleButton, refs.resolutionSelect, state);
   updateMode(refs.app, state);
   renderEditorView(state, refs.highlightLines, refs.ghostLines);
+  updateStatus(state, refs.statusLanguage, refs.statusTheme, refs.statusResolution);
 };
