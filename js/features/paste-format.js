@@ -7,14 +7,25 @@ export const bindPasteFormat = (refs, state, renderAll) => {
   }
 
   refs.codeInput.addEventListener('paste', (event) => {
-    const text = event.clipboardData ? event.clipboardData.getData('text') : '';
-    if (!text) return;
+    const clipboardText = event.clipboardData ? event.clipboardData.getData('text') : '';
+    if (clipboardText) {
+      event.preventDefault();
+      const language = detectLanguage(clipboardText);
+      const formatted = formatCode(clipboardText, language);
+      state.code = formatted;
+      refs.codeInput.value = state.code;
+      renderAll(refs, state);
+      return;
+    }
 
-    event.preventDefault();
-    const language = detectLanguage(text);
-    const formatted = formatCode(text, language);
-    state.code = formatted;
-    refs.codeInput.value = state.code;
-    renderAll(refs, state);
+    setTimeout(() => {
+      const text = refs.codeInput.value || '';
+      if (!text) return;
+      const language = detectLanguage(text);
+      const formatted = formatCode(text, language);
+      state.code = formatted;
+      refs.codeInput.value = state.code;
+      renderAll(refs, state);
+    }, 0);
   });
 };

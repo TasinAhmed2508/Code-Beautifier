@@ -5,17 +5,24 @@ export const initAuroraBackground = (shaderBg) => {
     return;
   }
 
+  const getSize = () => ({
+    width: shaderBg.clientWidth || window.innerWidth,
+    height: shaderBg.clientHeight || window.innerHeight
+  });
+
   const scene = new THREE.Scene();
   const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setPixelRatio(window.devicePixelRatio || 1);
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  const { width, height } = getSize();
+  renderer.setSize(width, height);
+  renderer.setClearColor(0x000000, 0);
   shaderBg.appendChild(renderer.domElement);
 
   const material = new THREE.ShaderMaterial({
     uniforms: {
       iTime: { value: 0 },
-      iResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) }
+      iResolution: { value: new THREE.Vector2(width, height) }
     },
     vertexShader: VERTEX_SHADER,
     fragmentShader: FRAGMENT_SHADER
@@ -34,8 +41,9 @@ export const initAuroraBackground = (shaderBg) => {
   animate();
 
   const handleResize = () => {
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    material.uniforms.iResolution.value.set(window.innerWidth, window.innerHeight);
+    const next = getSize();
+    renderer.setSize(next.width, next.height);
+    material.uniforms.iResolution.value.set(next.width, next.height);
   };
   window.addEventListener('resize', handleResize);
 

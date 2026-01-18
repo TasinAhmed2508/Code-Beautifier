@@ -8,11 +8,11 @@
 }
 
 .app[data-theme="dark"] {
-  background: var(--bg-dark);
+  background: transparent;
   color: var(--text-dark);
 }
 
 .app[data-theme="light"] {
-  background: var(--bg-light);
+  background: transparent;
   color: var(--text-light);
 }
