@@ -21,6 +21,7 @@
   <link rel="stylesheet" href="css/components/cta.css" />
   <link rel="stylesheet" href="css/components/export-menu.css" />
   <link rel="stylesheet" href="css/components/select.css" />
+  <link rel="stylesheet" href="css/components/shader-bg.css" />
   <link rel="stylesheet" href="css/components/status-bar.css" />
   <link rel="stylesheet" href="css/components/toolbar.css" />
   <link rel="stylesheet" href="css/components/swatches.css" />
@@ -43,6 +44,7 @@
   <link rel="stylesheet" href="css/responsive/editor.css" />
 </head>
 <body>
+  <div class="shader-bg" id="shader-bg" aria-hidden="true"></div>
   <div class="app" data-theme="dark">
     <nav class="topbar">
       <div class="brand">
@@ -177,6 +179,7 @@
     </main>
   </div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/prettier@3.2.5/standalone.js"></script>
   <script src="https://unpkg.com/prettier@3.2.5/plugins/babel.js"></script>

@@ -9,6 +9,7 @@ import { bindModeToggle } from './features/mode-toggle.js';
 import { bindResolutionSelect } from './features/resolution.js';
 import { bindPasteFormat } from './features/paste-format.js';
 import { bindExportMenu } from './features/export-menu.js';
+import { initAuroraBackground } from './features/aurora-bg.js';
 import { renderAll } from './ui/render.js';
 
 const refs = getDomRefs();
@@ -23,4 +24,5 @@ bindModeToggle(refs, state, renderAll);
 bindResolutionSelect(refs, state);
 bindPasteFormat(refs, state, renderAll);
 bindExportMenu(refs, state);
+initAuroraBackground(refs.shaderBg);
 renderAll(refs, state);

@@ -15,6 +15,7 @@ export const getDomRefs = () => {
     statusLanguage: document.getElementById('status-language'),
     statusTheme: document.getElementById('status-theme'),
     statusResolution: document.getElementById('status-resolution'),
+    shaderBg: document.getElementById('shader-bg'),
     exportMenu: document.getElementById('export-menu'),
     exportTrigger,
     exportPanel: document.getElementById('export-panel'),
