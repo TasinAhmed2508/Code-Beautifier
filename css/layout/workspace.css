@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 104px;
+  padding-top: 88px;
 }
 
 body.navbar-floating .workspace {
