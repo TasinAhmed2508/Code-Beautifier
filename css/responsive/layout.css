@@ -1,6 +1,10 @@
 @media (max-width: 768px) {
-  .topbar {
+  #navbar {
     padding: 0 16px;
+  }
+
+  .workspace {
+    padding-top: 88px;
   }
 
   .toolbar {
