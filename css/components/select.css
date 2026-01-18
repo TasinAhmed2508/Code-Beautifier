@@ -13,6 +13,11 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+.select:focus-visible {
+  outline: 2px solid rgba(101, 153, 255, 0.6);
+  outline-offset: 2px;
+}
+
 .app[data-theme="light"] .select {
   background: #fff;
   color: #0f172a;

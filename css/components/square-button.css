@@ -13,3 +13,8 @@
   color: #c7d7ff;
   background: rgba(101, 153, 255, 0.15);
 }
+
+.square:focus-visible {
+  outline: 2px solid rgba(101, 153, 255, 0.6);
+  outline-offset: 2px;
+}

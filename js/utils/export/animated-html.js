@@ -1,7 +1,11 @@
+import { detectLanguage } from '../lang/detect.js';
+import { highlightLine } from '../highlighter.js';
+import { buildSegments } from './segments.js';
+
 const escapeForTemplate = (value) =>
   value.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\${/g, '\\${');
 
-const line = (text) => text + '\n';
+const safeJson = (value) => JSON.stringify(value).replace(/<\//g, '<\\/');
 
 export const buildAnimatedHtml = (card, code, title) => {
   const cardStyle = getComputedStyle(card);
@@ -13,10 +17,12 @@ export const buildAnimatedHtml = (card, code, title) => {
   const bgColor = cardStyle.backgroundColor || '#0b0d11';
   const panelBg = windowStyle ? windowStyle.backgroundColor : 'rgba(20,20,24,0.9)';
   const barBg = barStyle ? barStyle.backgroundColor : 'rgba(24,24,28,0.9)';
-  const safeCode = escapeForTemplate(code);
   const safeTitle = escapeForTemplate(title || 'App.js');
+  const language = detectLanguage(code);
+  const segments = buildSegments(code, language, highlightLine, cardStyle);
+  const payload = safeJson(segments);
 
-  const html = [
+  return [
     '<!doctype html>',
     '<html lang="en">',
     '<head>',
@@ -53,20 +59,38 @@ export const buildAnimatedHtml = (card, code, title) => {
     '    </div>',
     '  </div>',
     '  <script>',
-    `    const code = \`${safeCode}\`;`,
+    `    const segments = ${payload};`,
     '    const target = document.getElementById("code");',
-    '    let i = 0;',
+    '    let segIndex = 0;',
+    '    let charIndex = 0;',
+    '    let span = null;',
     '    const speed = 12;',
+    '    const nextSpan = (color) => {',
+    '      span = document.createElement("span");',
+    '      span.style.color = color;',
+    '      target.appendChild(span);',
+    '    };',
     '    const tick = () => {',
-    '      target.textContent = code.slice(0, i);',
-    '      if (i < code.length) { i += 1; setTimeout(tick, speed); }',
-    '      else { const caret = document.createElement("span"); caret.className = "caret"; target.appendChild(caret); }',
+    '      const seg = segments[segIndex];',
+    '      if (!seg) {',
+    '        const caret = document.createElement("span");',
+    '        caret.className = "caret";',
+    '        target.appendChild(caret);',
+    '        return;',
+    '      }',
+    '      if (!span) nextSpan(seg.c);',
+    '      span.textContent += seg.t.charAt(charIndex);',
+    '      charIndex += 1;',
+    '      if (charIndex >= seg.t.length) {',
+    '        charIndex = 0;',
+    '        segIndex += 1;',
+    '        span = null;',
+    '      }',
+    '      setTimeout(tick, speed);',
     '    };',
     '    tick();',
     '  </script>',
     '</body>',
     '</html>'
-  ].map(line).join('');
-
-  return html;
+  ].join('\n');
 };

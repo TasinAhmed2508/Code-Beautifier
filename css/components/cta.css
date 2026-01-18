@@ -29,6 +29,11 @@
   box-shadow: 0 14px 30px rgba(73, 232, 242, 0.25);
 }
 
+.cta:focus-visible {
+  outline: 2px solid rgba(101, 153, 255, 0.6);
+  outline-offset: 2px;
+}
+
 .app[data-theme="light"] .cta {
   background: #fff;
   color: #1f2937;

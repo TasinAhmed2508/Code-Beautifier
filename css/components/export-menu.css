@@ -17,10 +17,17 @@
   display: none;
   gap: 6px;
   z-index: 20;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
 }
 
 .export-menu.is-open .export-menu__panel {
   display: grid;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
 }
 
 .export-menu__item {
@@ -39,6 +46,11 @@
 .export-menu__item:hover {
   background: rgba(101, 153, 255, 0.2);
   border-color: rgba(101, 153, 255, 0.4);
+}
+
+.export-menu__item:focus-visible {
+  outline: 2px solid rgba(101, 153, 255, 0.6);
+  outline-offset: 2px;
 }
 
 .app[data-theme="light"] .export-menu__panel {
