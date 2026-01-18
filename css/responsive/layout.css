@@ -4,7 +4,11 @@
   }
 
   .workspace {
-    padding-top: 88px;
+    padding-top: 96px;
+  }
+
+  body.navbar-floating .workspace {
+    padding-top: 128px;
   }
 
   .toolbar {
