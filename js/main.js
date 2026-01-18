@@ -1,7 +1,7 @@
 import { DEFAULT_CODE, WINDOW_STYLES } from './modules/data.js';
-import { exportAsImage } from './modules/exporter.js';
 import { getDomRefs } from './modules/dom.js';
 import { renderAll } from './modules/ui.js';
+import { bindExportMenu } from './modules/export-menu.js';
 
 const refs = getDomRefs();
 
@@ -12,7 +12,8 @@ const state = {
   windowStyle: 'mac',
   showLineNumbers: true,
   mode: 'dark',
-  language: 'generic'
+  language: 'generic',
+  resolution: 3
 };
 
 const cycleWindowStyle = () => {
@@ -59,14 +60,10 @@ refs.toggleMode.addEventListener('click', () => {
   renderAll(refs, state);
 });
 
-if (refs.exportButton && refs.exportText) {
-  refs.exportButton.addEventListener('click', async () => {
-    await exportAsImage({
-      element: refs.exportCard,
-      button: refs.exportButton,
-      status: refs.exportText
-    });
-  });
-}
+refs.resolutionSelect.addEventListener('change', (event) => {
+  const value = Number(event.target.value);
+  state.resolution = Number.isFinite(value) ? value : 3;
+});
 
+bindExportMenu(refs, state);
 renderAll(refs, state);

@@ -24,7 +24,7 @@ export const updateExportCard = (exportCard, state) => {
   exportCard.dataset.window = state.windowStyle;
 };
 
-export const updateToolbar = (paddingToggle, toggleLines, windowStyleButton, state) => {
+export const updateToolbar = (paddingToggle, toggleLines, windowStyleButton, resolutionSelect, state) => {
   paddingToggle.querySelectorAll('button').forEach((button) => {
     button.classList.toggle('is-active', button.dataset.padding === state.padding);
   });
@@ -34,6 +34,10 @@ export const updateToolbar = (paddingToggle, toggleLines, windowStyleButton, sta
 
   const label = state.windowStyle === 'mac' ? 'macOS' : state.windowStyle === 'win' ? 'Windows' : 'No Window';
   windowStyleButton.textContent = label;
+
+  if (resolutionSelect) {
+    resolutionSelect.value = String(state.resolution);
+  }
 };
 
 export const updateMode = (app, state) => {
@@ -54,7 +58,7 @@ export const renderEditorView = (state, highlightLines, ghostLines) => {
 export const renderAll = (refs, state) => {
   buildSwatches(refs.themeSwatches, state);
   updateExportCard(refs.exportCard, state);
-  updateToolbar(refs.paddingToggle, refs.toggleLines, refs.windowStyleButton, state);
+  updateToolbar(refs.paddingToggle, refs.toggleLines, refs.windowStyleButton, refs.resolutionSelect, state);
   updateMode(refs.app, state);
   renderEditorView(state, refs.highlightLines, refs.ghostLines);
 };

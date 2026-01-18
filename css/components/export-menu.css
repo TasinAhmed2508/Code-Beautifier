@@ -1,0 +1,57 @@
+.export-menu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.export-menu__panel {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 10px);
+  min-width: 180px;
+  padding: 8px;
+  border-radius: 14px;
+  background: rgba(18, 18, 24, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  display: none;
+  gap: 6px;
+  z-index: 20;
+}
+
+.export-menu.is-open .export-menu__panel {
+  display: grid;
+}
+
+.export-menu__item {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e5e7eb;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  border: 1px solid transparent;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.export-menu__item:hover {
+  background: rgba(101, 153, 255, 0.2);
+  border-color: rgba(101, 153, 255, 0.4);
+}
+
+.app[data-theme="light"] .export-menu__panel {
+  background: rgba(255, 255, 255, 0.96);
+  border-color: rgba(15, 23, 42, 0.1);
+}
+
+.app[data-theme="light"] .export-menu__item {
+  color: #0f172a;
+  background: rgba(15, 23, 42, 0.04);
+}
+
+.app[data-theme="light"] .export-menu__item:hover {
+  background: rgba(59, 130, 246, 0.14);
+  border-color: rgba(59, 130, 246, 0.3);
+}

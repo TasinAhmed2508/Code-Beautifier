@@ -1,5 +1,5 @@
 export const getDomRefs = () => {
-  const exportButton = document.getElementById('export-image');
+  const exportTrigger = document.getElementById('export-trigger');
   return {
     app: document.querySelector('.app'),
     exportCard: document.getElementById('export-card'),
@@ -11,7 +11,10 @@ export const getDomRefs = () => {
     ghostLines: document.getElementById('ghost-lines'),
     codeInput: document.getElementById('code-input'),
     toggleMode: document.getElementById('toggle-mode'),
-    exportButton,
-    exportText: exportButton ? exportButton.querySelector('.cta__text') : null
+    resolutionSelect: document.getElementById('resolution-select'),
+    exportMenu: document.getElementById('export-menu'),
+    exportTrigger,
+    exportPanel: document.getElementById('export-panel'),
+    exportText: exportTrigger ? exportTrigger.querySelector('.cta__text') : null
   };
 };

@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="css/components/icon-button.css" />
   <link rel="stylesheet" href="css/components/icons.css" />
   <link rel="stylesheet" href="css/components/cta.css" />
+  <link rel="stylesheet" href="css/components/export-menu.css" />
+  <link rel="stylesheet" href="css/components/select.css" />
   <link rel="stylesheet" href="css/components/toolbar.css" />
   <link rel="stylesheet" href="css/components/swatches.css" />
   <link rel="stylesheet" href="css/components/pill.css" />
@@ -75,15 +77,22 @@
           </span>
         </button>
         <span class="divider"></span>
-        <button class="cta" id="export-image">
-          <span class="cta__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
-              <circle cx="12" cy="13" r="4"></circle>
-            </svg>
-          </span>
-          <span class="cta__text">Export Image</span>
-        </button>
+        <div class="export-menu" id="export-menu">
+          <button class="cta" id="export-trigger" aria-haspopup="true" aria-expanded="false">
+            <span class="cta__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path>
+                <circle cx="12" cy="13" r="4"></circle>
+              </svg>
+            </span>
+            <span class="cta__text">Export</span>
+          </button>
+          <div class="export-menu__panel" id="export-panel" role="menu" aria-hidden="true">
+            <button class="export-menu__item" data-export="copy" role="menuitem">Copy PNG</button>
+            <button class="export-menu__item" data-export="download-png" role="menuitem">Download PNG</button>
+            <button class="export-menu__item" data-export="download-svg" role="menuitem">Download SVG</button>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -115,6 +124,17 @@
             <div class="control">
               <span class="toolbar__label">Lines</span>
               <button class="square" id="toggle-lines" aria-pressed="true">#</button>
+            </div>
+
+            <div class="control">
+              <span class="toolbar__label">Resolution</span>
+              <select class="select" id="resolution-select" aria-label="Export resolution">
+                <option value="2">1K</option>
+                <option value="3" selected>2K</option>
+                <option value="4">4K</option>
+                <option value="6">6K</option>
+                <option value="8">8K</option>
+              </select>
             </div>
           </div>
         </div>

@@ -1,7 +1,9 @@
-﻿export const exportAsImage = async ({
+export const exportAsImage = async ({
   element,
   button,
   status,
+  mode = 'copy',
+  scale = 3,
   onDone
 }) => {
   if (!window.html2canvas || !element) {
@@ -10,32 +12,38 @@
 
   button.disabled = true;
   const originalText = status.textContent;
-  status.textContent = 'Capturing...';
+  status.textContent = mode === 'copy' ? 'Copying...' : 'Exporting...';
 
   try {
     await new Promise((resolve) => setTimeout(resolve, 120));
     const canvas = await window.html2canvas(element, {
-      scale: 3,
+      scale,
       backgroundColor: null,
       logging: false,
       useCORS: true
     });
+
+    if (mode === 'download-svg') {
+      downloadSvg(canvas);
+      status.textContent = 'Saved SVG';
+      return;
+    }
 
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     if (!blob) {
       return;
     }
 
-    if (navigator.clipboard && window.ClipboardItem) {
-      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
-      status.textContent = 'Copied!';
-    } else {
-      const link = document.createElement('a');
-      link.download = 'code-snippet.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      status.textContent = 'Downloaded';
+    if (mode === 'copy') {
+      const copied = await copyToClipboard(blob);
+      if (copied) {
+        status.textContent = 'Copied!';
+        return;
+      }
     }
+
+    downloadPng(canvas);
+    status.textContent = 'Downloaded';
   } catch (error) {
     status.textContent = 'Try Again';
     console.error('Export failed', error);
@@ -50,3 +58,32 @@
   }
 };
 
+const copyToClipboard = async (blob) => {
+  if (navigator.clipboard && window.ClipboardItem) {
+    await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+    return true;
+  }
+  return false;
+};
+
+const downloadPng = (canvas) => {
+  const link = document.createElement('a');
+  link.download = 'code-snippet.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+};
+
+const downloadSvg = (canvas) => {
+  const dataUrl = canvas.toDataURL('image/png');
+  const svg = `<?xml version="1.0" encoding="UTF-8"?>
+` +
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">` +
+    `<image href="${dataUrl}" width="100%" height="100%" /></svg>`;
+  const blob = new Blob([svg], { type: 'image/svg+xml' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.download = 'code-snippet.svg';
+  link.href = url;
+  link.click();
+  URL.revokeObjectURL(url);
+};
