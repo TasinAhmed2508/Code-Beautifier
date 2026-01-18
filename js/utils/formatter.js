@@ -11,14 +11,14 @@ const PARSERS = {
 
 const getParser = (language) => PARSERS[language] || null;
 
-export const formatCode = (code, language) => {
+export const formatCode = async (code, language) => {
   const parser = getParser(language);
   if (!parser || !window.prettier) {
     return code;
   }
 
   try {
-    return window.prettier.format(code, {
+    const result = window.prettier.format(code, {
       parser,
       plugins: window.prettierPlugins,
       printWidth: 80,
@@ -26,6 +26,10 @@ export const formatCode = (code, language) => {
       semi: true,
       singleQuote: true
     });
+    if (result && typeof result.then === 'function') {
+      return await result;
+    }
+    return result;
   } catch (error) {
     console.warn('Format failed', error);
     return code;

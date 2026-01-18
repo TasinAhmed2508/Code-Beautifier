@@ -6,10 +6,10 @@ export const bindPasteFormat = (refs, state, renderAll) => {
     return;
   }
 
-  const applyText = (text) => {
+  const applyText = async (text) => {
     if (!text) return;
     const language = detectLanguage(text);
-    const formatted = formatCode(text, language);
+    const formatted = await formatCode(text, language);
     state.code = formatted;
     refs.codeInput.value = state.code;
     renderAll(refs, state);
@@ -19,7 +19,7 @@ export const bindPasteFormat = (refs, state, renderAll) => {
     const clipboardText = event.clipboardData ? event.clipboardData.getData('text') : '';
     if (clipboardText) {
       event.preventDefault();
-      applyText(clipboardText);
+      await applyText(clipboardText);
       return;
     }
 
