@@ -1,69 +1,26 @@
-import { DEFAULT_CODE, WINDOW_STYLES } from './modules/data.js';
-import { getDomRefs } from './modules/dom.js';
-import { renderAll } from './modules/ui.js';
-import { bindExportMenu } from './modules/export-menu.js';
+import { getDomRefs } from './core/dom.js';
+import { createState } from './core/state.js';
+import { bindCodeInput } from './features/code-input.js';
+import { bindThemeSwatches } from './features/theme-swatches.js';
+import { bindPaddingToggle } from './features/padding.js';
+import { bindWindowStyle } from './features/window-style.js';
+import { bindLineNumbersToggle } from './features/line-numbers.js';
+import { bindModeToggle } from './features/mode-toggle.js';
+import { bindResolutionSelect } from './features/resolution.js';
+import { bindPasteFormat } from './features/paste-format.js';
+import { bindExportMenu } from './features/export-menu.js';
+import { renderAll } from './ui/render.js';
 
 const refs = getDomRefs();
+const state = createState();
 
-const state = {
-  code: DEFAULT_CODE,
-  theme: 'ray',
-  padding: 'medium',
-  windowStyle: 'mac',
-  showLineNumbers: true,
-  mode: 'dark',
-  language: 'generic',
-  resolution: 3
-};
-
-const cycleWindowStyle = () => {
-  const currentIndex = WINDOW_STYLES.indexOf(state.windowStyle);
-  const nextIndex = (currentIndex + 1) % WINDOW_STYLES.length;
-  state.windowStyle = WINDOW_STYLES[nextIndex];
-};
-
-const handlePaddingClick = (event) => {
-  const button = event.target.closest('button');
-  if (!button || !button.dataset.padding) return;
-  state.padding = button.dataset.padding;
-  renderAll(refs, state);
-};
-
-const handleThemeClick = (event) => {
-  const button = event.target.closest('.swatch');
-  if (!button) return;
-  state.theme = button.dataset.theme;
-  renderAll(refs, state);
-};
-
-refs.codeInput.value = state.code;
-refs.codeInput.addEventListener('input', (event) => {
-  state.code = event.target.value;
-  renderAll(refs, state);
-});
-
-refs.themeSwatches.addEventListener('click', handleThemeClick);
-refs.paddingToggle.addEventListener('click', handlePaddingClick);
-
-refs.windowStyleButton.addEventListener('click', () => {
-  cycleWindowStyle();
-  renderAll(refs, state);
-});
-
-refs.toggleLines.addEventListener('click', () => {
-  state.showLineNumbers = !state.showLineNumbers;
-  renderAll(refs, state);
-});
-
-refs.toggleMode.addEventListener('click', () => {
-  state.mode = state.mode === 'dark' ? 'light' : 'dark';
-  renderAll(refs, state);
-});
-
-refs.resolutionSelect.addEventListener('change', (event) => {
-  const value = Number(event.target.value);
-  state.resolution = Number.isFinite(value) ? value : 3;
-});
-
+bindCodeInput(refs, state, renderAll);
+bindThemeSwatches(refs, state, renderAll);
+bindPaddingToggle(refs, state, renderAll);
+bindWindowStyle(refs, state, renderAll);
+bindLineNumbersToggle(refs, state, renderAll);
+bindModeToggle(refs, state, renderAll);
+bindResolutionSelect(refs, state);
+bindPasteFormat(refs, state, renderAll);
 bindExportMenu(refs, state);
 renderAll(refs, state);

@@ -1,4 +1,4 @@
-﻿import { highlightLine } from './highlighter.js';
+import { highlightLine } from '../utils/highlighter.js';
 
 const buildLineNumbers = (lines) =>
   lines
@@ -29,4 +29,3 @@ export const renderEditor = ({
     ? `<div class="editor__lines editor__lines--ghost">${lineNumbers}</div>`
     : '';
 };
-

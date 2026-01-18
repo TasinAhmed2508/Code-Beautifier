@@ -1,3 +1,5 @@
+import { buildSvgFromCard } from '../utils/svg/renderer.js';
+
 export const exportAsImage = async ({
   element,
   button,
@@ -6,7 +8,7 @@ export const exportAsImage = async ({
   scale = 3,
   onDone
 }) => {
-  if (!window.html2canvas || !element) {
+  if (!element) {
     return;
   }
 
@@ -15,6 +17,16 @@ export const exportAsImage = async ({
   status.textContent = mode === 'copy' ? 'Copying...' : 'Exporting...';
 
   try {
+    if (mode === 'download-svg') {
+      downloadSvg(element, scale);
+      status.textContent = 'Saved SVG';
+      return;
+    }
+
+    if (!window.html2canvas) {
+      return;
+    }
+
     await new Promise((resolve) => setTimeout(resolve, 120));
     const canvas = await window.html2canvas(element, {
       scale,
@@ -22,12 +34,6 @@ export const exportAsImage = async ({
       logging: false,
       useCORS: true
     });
-
-    if (mode === 'download-svg') {
-      downloadSvg(canvas);
-      status.textContent = 'Saved SVG';
-      return;
-    }
 
     const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/png'));
     if (!blob) {
@@ -73,12 +79,8 @@ const downloadPng = (canvas) => {
   link.click();
 };
 
-const downloadSvg = (canvas) => {
-  const dataUrl = canvas.toDataURL('image/png');
-  const svg = `<?xml version="1.0" encoding="UTF-8"?>
-` +
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}">` +
-    `<image href="${dataUrl}" width="100%" height="100%" /></svg>`;
+const downloadSvg = (card, scale) => {
+  const { svg } = buildSvgFromCard(card, scale);
   const blob = new Blob([svg], { type: 'image/svg+xml' });
   const url = URL.createObjectURL(blob);
   const link = document.createElement('a');
